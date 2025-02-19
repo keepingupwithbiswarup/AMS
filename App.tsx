@@ -6,11 +6,13 @@ import HomePage from './screens/HomePage';
 import LoginPage from './screens/LoginPage';
 import LiveLocation from './screens/LiveLocation';
 import { Text } from 'react-native';
+import UIPage from './screens/UIPage';
 
 type RootStackParamList = {
   LoginPage: undefined;
   HomePage: undefined;
   LiveLocation: { latitude: number; longitude: number };
+  UIPage: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -43,12 +45,14 @@ function App(): React.JSX.Element {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={isLoggedIn ? 'HomePage' : 'LoginPage'}
+        // initialRouteName={isLoggedIn ? 'HomePage' : 'LoginPage'}
+        initialRouteName={'UIPage'}
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="LoginPage" component={LoginPage} />
         <Stack.Screen name="HomePage" component={HomePage} />
         <Stack.Screen name="LiveLocation" component={LiveLocation} />
+        <Stack.Screen name="UIPage" component={UIPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

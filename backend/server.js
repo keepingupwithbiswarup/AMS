@@ -39,6 +39,33 @@ mssql.connect(dbConfig).then(pool => {
         res.status(500).send('Internal Server Error');
       }
     });
+    app.get('/api/items', async (req, res) => {
+      try {
+        const result = await pool.request().query('SELECT * FROM Items');
+        res.status(200).json(result.recordset);
+      } catch (err) {
+        console.error('Error executing query:', err.message);
+        res.status(500).send('Internal Server Error');
+      }
+    });
+    // app.get('/api/products', async (req, res) => {
+    //   try {
+    //     const result = await pool.request().query('SELECT * FROM Products');
+    //     res.status(200).json(result.recordset);
+    //   } catch (err) {
+    //     console.error('Error executing query:', err.message);
+    //     res.status(500).send('Internal Server Error');
+    //   }
+    // });
+    // app.get('/api/medicines', async (req, res) => {
+    //   try {
+    //     const result = await pool.request().query('SELECT * FROM Medicines');
+    //     res.status(200).json(result.recordset);
+    //   } catch (err) {
+    //     console.error('Error executing query:', err.message);
+    //     res.status(500).send('Internal Server Error');
+    //   }
+    // });
     app.get('/api/attendance', async (req, res) => {
         try {
           const { date, EmployeeId } = req.query;
